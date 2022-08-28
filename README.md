@@ -1,4 +1,6 @@
-# hasura-migration
+# NL App Migration
+
+## hasura-migration
 - Install version specific CLI for **hasura** based on source/target hasura instances. [link](https://hasura.io/docs/latest/hasura-cli/install-hasura-cli/)
 - Run command `hasura init source-hasura --endpoint https://source-hasura.app --admin-secret source-hasura-secret` to download metadata information for Hasura
 - Check & make sure all the environment variables are present in the **target** hasura environment file / docker environment variables registry.
@@ -6,11 +8,11 @@
 - Navigate to **source-hasura** directory and in `config.yaml` file, configure the variables `endpoint` & `admin_secret` to point to the **target** hasura.
 - To upload & deploy these migrations to target server, use command `hasura deploy` in the **source-hasura** directory.
 
-# Fusion Auth Data migration
+## Fusion Auth Data migration
 This [tool](https://github.com/choxx/fa-scripts) can be used for Fusion Auth data migration. Please go through the README there.
 
-# Postgres Migration
-## Export
+## Postgres Migration
+### Export
 - ssh on to the **source server** where Postgresql is installed.
 - Ensure you have user credentials for the DB to export the dump.
 - Get into the docker CLI for postgres: `docker exec -it psql bash` & create a directory (e.g. `/root/psql-dump`). [here psql is the name of Postgres container]
@@ -33,7 +35,7 @@ This [tool](https://github.com/choxx/fa-scripts) can be used for Fusion Auth dat
     - `docker cp <container-id>:/root/psql-dump ./psql-dump` #copying the dump files to host first
     - Now export these files present in `./psql-dump` directory to local machine (`scp root@server-ip:~/psql-dump/* ./`)
 
-## Import
+### Import
 - Once we have the sql dump files, we have to upload them on to the target host first. (`scp ./psql-dump/* root@server-ip:~/psql-dump`)
 - Upload the dump files to docker container: `docker cp ./psql-dump <container-id>:/root/psql-dump`
 - Get into the docker CLI for postgres: `docker exec -it psql bash` & navigate to the psql-dump upload directory (e.g. `/root/psql-dump`)
