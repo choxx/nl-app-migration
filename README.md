@@ -18,18 +18,18 @@ This [tool](https://github.com/choxx/fa-scripts) can be used for Fusion Auth dat
 - Get into the docker CLI for postgres: `docker exec -it psql bash` & create a directory (e.g. `/root/psql-dump`). [here psql is the name of Postgres container]
 - Navigate to `/root/psql-dump` & export for each table's INSERT queries (insert queries only because we have schema migrated via Hasura CLI already):
   ```
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=assessment_results prerakbalakdb > assessment_results.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=assessment_visit_results prerakbalakdb > assessment_visit_results.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=competency_mapping prerakbalakdb > competency_mapping.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=employees prerakbalakdb > employees.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=form_config prerakbalakdb > form_config.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=homelearning_event prerakbalakdb > homelearning_event.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=mentors prerakbalakdb > mentors.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=school prerakbalakdb > school.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=school_list prerakbalakdb > school_list.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=school_visit prerakbalakdb > school_visit.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=start_learning_event prerakbalakdb > start_learning_event.sql
-  pg_dump -U mpcuplakshyauser --column-inserts --data-only --table=student_install prerakbalakdb > student_install.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=assessment_results prerakbalakdb > assessment_results.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=assessment_visit_results prerakbalakdb > assessment_visit_results.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=competency_mapping prerakbalakdb > competency_mapping.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=employees prerakbalakdb > employees.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=form_config prerakbalakdb > form_config.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=homelearning_event prerakbalakdb > homelearning_event.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=mentors prerakbalakdb > mentors.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=school prerakbalakdb > school.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=school_list prerakbalakdb > school_list.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=school_visit prerakbalakdb > school_visit.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=start_learning_event prerakbalakdb > start_learning_event.sql
+  pg_dump -U mpcuplakshyauser --column-inserts --data-only --rows-per-insert 500 --table=student_install prerakbalakdb > student_install.sql
   ```
 - Now we have all the dump files for each table. Let's export these files out of docker container first, and then we can download them on local machine.
     - `docker cp <container-id>:/root/psql-dump ./psql-dump` #copying the dump files to host first
